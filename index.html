@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>Laboratory for Prototype Pollution</title>
+</head>
+
+<body>
+    <h1>Laboratory for Prototype Pollution</h1>
+    <div id="mydiv"></div>
+    <script>
+        const person = { login: "false" }
+        const urll = new URL(location)
+
+
+        // get parametrs
+        for (const [param1, param2] of urll.searchParams) {
+
+            if (!param1.includes('[')) {
+                person[param1] = param2
+                continue
+            }
+            const [param_1, param_2] = param1.split('[').map(sampl => sampl.replace(']', ''))
+
+            if (person[param_1] == undefined) {
+                person[param_1] = {}
+            }
+            person[param_1][param_2] = param2
+        }
+
+        const myname = {}
+
+        if (person.login == "truth") {
+            document.getElementById('mydiv').innerHTML = myname["text"]
+        } else {
+            document.getElementById('mydiv').innerHTML = "please login first"
+        }
+
+    </script>
+</body>
+
+</html>
